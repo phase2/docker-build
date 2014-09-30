@@ -17,6 +17,7 @@ RUN composer global require drush/drush:dev-master
 RUN composer global update
 
 # Install Grunt, etc.
+RUN npm install -g grunt-cli
 RUN npm install --save-dev grunt
 RUN npm install --save-dev git+https://github.com/phase2/grunt-drupal-tasks.git
 
