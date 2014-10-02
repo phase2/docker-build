@@ -7,7 +7,7 @@ RUN apt-get -y update
 RUN apt-get install -y nodejs
 RUN apt-get install -y git
 RUN apt-get install -y curl
-RUN apt-get install -y php5
+RUN apt-get install -y php5 php5-curl
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
