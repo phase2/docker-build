@@ -22,7 +22,7 @@ RUN npm install --save-dev grunt
 RUN npm install --save-dev git+https://github.com/phase2/grunt-drupal-tasks.git
 
 # Put composer installed packages in the PATH
-RUN sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
+RUN sed -i '1i export PATH="/root/.composer/vendor/bin:$PATH"' $HOME/.bashrc
 
 # Run something to keep the container up so we can nsenter it
 CMD while true; do sleep 360000; done
