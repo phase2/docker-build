@@ -1,4 +1,4 @@
-FROM phase2/servicebase7
+FROM phase2/servicebase
 
 RUN yum -y update
 
