@@ -3,8 +3,8 @@ FROM phase2/servicebase
 RUN yum -y update
 
 RUN yum install -y nodejs npm
-RUN yum install -y git patch diff tar unzip gzip
-RUN yum install -y php php-curl
+RUN yum install -y git patch make diff tar unzip gzip
+RUN yum install -y php php-curl php-mbstring
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
@@ -12,6 +12,9 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bi
 # Install Drush
 RUN composer global require drush/drush:dev-master
 RUN composer global update
+
+# Update npm
+RUN npm install -g npm
 
 # Install Grunt, etc.
 RUN npm install -g grunt-cli
