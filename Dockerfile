@@ -27,8 +27,6 @@ RUN npm install -g npm
 
 # Install Grunt, etc.
 RUN npm install -g grunt-cli
-RUN npm install --save-dev grunt
-RUN npm install --save-dev git+https://github.com/phase2/grunt-drupal-tasks.git
 
 # Run something to keep the container up so we can nsenter it.
 # Also create the Drush cache dir on the /data volume.
