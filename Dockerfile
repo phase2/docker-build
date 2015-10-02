@@ -40,6 +40,9 @@ ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/roo
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
 ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 
+# Ensure $HOME is set
+ENV HOME /root
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
 
@@ -53,13 +56,6 @@ RUN npm install -g npm@^2
 # Install Bower, Grunt (CLI), and Yeoman
 RUN npm install -g bower grunt-cli yo
 
-# Run something to keep the container up so we can nsenter it.
-# Also create the Drush cache dir on the /data volume.
-CMD mkdir /data/.drush; while true; do sleep 1; done
-
-# Make sure that Composer and Drush items make it into the /data volume and not the CoW filesystem.
-# Also put composer executables into $PATH.
-ENV HOME /root/
-ENV CACHE_PREFIX /data/.drush
-
 ADD root /
+
+CMD /devtools_versions.sh
