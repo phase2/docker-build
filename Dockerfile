@@ -11,6 +11,7 @@ RUN yum -y install \
       bzip2 \
       git \
       make \
+      mariadb \
       https://rpm.nodesource.com/pub_0.12/el/6/x86_64/nodejs-0.12.7-1nodesource.el6.x86_64.rpm \
       patch \
       php55 \
@@ -28,6 +29,7 @@ RUN yum -y install \
       php55-php-pecl-memcache \
       php55-php-soap \
       php55-php-xml \
+      postgresql \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
