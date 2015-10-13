@@ -1,0 +1,7 @@
+[template]
+src = "php.conf.tmpl"
+dest = "/opt/rh/php55/root/etc/php.d/zzz-docker.ini"
+uid = 0
+gid = 0
+mode = "0644"
+keys = []

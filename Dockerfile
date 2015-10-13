@@ -45,6 +45,11 @@ ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 # Ensure $HOME is set
 ENV HOME /root
 
+# PHP Tuning
+ENV PHP_MEMORY_LIMIT        256m
+ENV PHP_OPCACHE_MEMORY      192
+ENV MAX_EXECUTION_TIME      30
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
 
