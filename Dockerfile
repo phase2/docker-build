@@ -9,6 +9,7 @@ RUN yum -y install \
 
 RUN yum -y install \
       bzip2 \
+      gcc-c++ \
       git \
       make \
       mariadb \
