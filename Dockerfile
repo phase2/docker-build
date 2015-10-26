@@ -9,6 +9,7 @@ RUN yum -y install \
 
 RUN yum -y install \
       bzip2 \
+      gcc-c++ \
       git \
       make \
       mariadb \
@@ -33,6 +34,7 @@ RUN yum -y install \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
+      sendmail \
       unzip
 
 # Ensure php55 and ruby193 binaries are in path
