@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z "$DEVTOOLS_PRIVATE_KEY" ]; then
+  echo
+  echo "DEVTOOLS_PRIVATE_KEY is not set. You will not be able to clone private repositories."
+  echo
+  exit  
+fi
+
+echo 
+echo "DEVTOOLS_PRIVATE_KEY exists. Setting up private key..."
+
+mkdir /root/.ssh
+echo "$DEVTOOLS_PRIVATE_KEY" > /root/.ssh/id_dsa
+chmod 600 /root/.ssh/id_dsa
+
+ssh-keyscan -H bitbucket.org >> /root/.ssh/known_hosts
+ssh-keyscan -H github.com >> /root/.ssh/known_hosts
+
