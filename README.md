@@ -16,7 +16,7 @@ Contains everything you need to work with Drupal, including use of tools such as
 * Out of the box support for PHP 5.5, Ruby 1.9.3, and Node 0.12.7.
 * Global availability of Composer, NPM v2, Bower, Grunt, and Yeoman.
 
-For more details of specific packages, libraries, and utiltieis, please see the
+For more details of specific packages, libraries, and utilities, please see the
 [Dockerfile](https://bitbucket.org/phase2tech/p2docker/src/master/p2docker-devtools-build/Dockerfile).
 
 ## Drush (Drupal Shell) Configuration
