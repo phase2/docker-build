@@ -70,4 +70,8 @@ ENV PHP_MEMORY_LIMIT        256m
 ENV PHP_OPCACHE_MEMORY      192
 ENV MAX_EXECUTION_TIME      30
 
+# Init Configuration
+## Suppress init system logging.
+ENV S6_LOGGING=1
+
 CMD /devtools_versions.sh
