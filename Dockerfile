@@ -73,5 +73,6 @@ ENV MAX_EXECUTION_TIME      30
 # Init Configuration
 ## Suppress init system logging.
 ENV S6_LOGGING=1
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=0
 
 CMD /devtools_versions.sh
