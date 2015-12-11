@@ -63,7 +63,7 @@ RUN npm install -g bower grunt-cli yo
 ADD root /
 
 # Install Drush commands
-RUN drush pm-download -yv registry_rebuild --destination=/etc/drush/commands
+RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
 
 # PHP Tuning
 ENV PHP_MEMORY_LIMIT        256m
