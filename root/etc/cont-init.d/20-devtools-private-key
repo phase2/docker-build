@@ -25,7 +25,7 @@ else
   echo "You can import a private key by setting the DEVTOOLS_PRIVATE_KEY "
   echo "environment variable with:"
   echo " "
-  echo " export DEVTOOLS_PRIVATE_KEY=\"\$(openssl base64 -e -A -in ~/.ssh/id_rsa)\""
+  echo " eval $(~/Projects/_devtools_vm/bin/encode-key.sh)"
   echo " "
   echo "or you can import a private key by volume mounting a key at "
   echo " "
