@@ -70,4 +70,12 @@ ENV PHP_MEMORY_LIMIT        256m
 ENV PHP_OPCACHE_MEMORY      192
 ENV MAX_EXECUTION_TIME      30
 
+# Init Configuration
+## Suppress init system logging.
+ENV S6_LOGGING=1
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=0
+
+# Suppress printing the exit code.
+RUN sed -i '/  if { s6-echo -- "${1} exited ${?}" }/d' /etc/s6/init/init-stage2
+
 CMD /devtools_versions.sh
