@@ -35,10 +35,11 @@ RUN yum -y install \
       ruby193-rubygems \
       ruby193-ruby-devel \
       sendmail \
-      unzip
-
-# Necessary library for phantomjs
-RUN yum -y install fontconfig
+      unzip \
+      # necessary for drush
+      which \
+      # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
+      fontconfig
 
 # Ensure php55 and ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -66,7 +67,12 @@ RUN npm install -g bower grunt-cli yo
 ADD root /
 
 # Install Drush commands
+# Drush appears to temporarily need no limit at all forced in the php
+# config as the setting in root/etc/drush/drushrc.php does not appear
+# to be working until runs using the built image
+RUN echo "memory_limit=-1" > /opt/rh/php55/root/etc/php.d/z_drush_memory.ini
 RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
+RUN rm /opt/rh/php55/root/etc/php.d/z_drush_memory.ini
 
 # PHP Tuning
 ENV PHP_MEMORY_LIMIT        256m
