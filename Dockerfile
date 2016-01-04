@@ -37,6 +37,9 @@ RUN yum -y install \
       sendmail \
       unzip
 
+# Necessary library for phantomjs
+RUN yum -y install fontconfig
+
 # Ensure php55 and ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
