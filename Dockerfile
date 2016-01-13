@@ -13,6 +13,7 @@ RUN yum -y install \
       git \
       make \
       mariadb \
+      nmap-ncat \
       https://rpm.nodesource.com/pub_0.12/el/7/x86_64/nodejs-0.12.7-1nodesource.el7.centos.x86_64.rpm \
       patch \
       php55 \
