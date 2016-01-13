@@ -35,7 +35,8 @@ RUN yum -y install \
       ruby193-rubygems \
       ruby193-ruby-devel \
       sendmail \
-      unzip
+      unzip \
+      which
 
 # Ensure php55 and ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -62,8 +63,14 @@ RUN npm install -g bower grunt-cli yo
 
 ADD root /
 
+# Patch Drush to not scan node & bower directories
+# https://github.com/drush-ops/drush/pull/1347#issuecomment-171301502
+WORKDIR /root/.composer/vendor/drush/drush
+RUN git apply /tmp/drush-scan-directory-ignore-dirs.patch
+WORKDIR /
+
 # Install Drush commands
-RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
+#RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
 
 # PHP Tuning
 ENV PHP_MEMORY_LIMIT        256m
