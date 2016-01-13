@@ -66,6 +66,12 @@ RUN npm install -g bower grunt-cli yo
 
 ADD root /
 
+# Patch Drush to not scan node & bower directories
+# https://github.com/drush-ops/drush/pull/1347#issuecomment-171301502
+WORKDIR /root/.composer/vendor/drush/drush
+RUN git apply /tmp/drush-scan-directory-ignore-dirs.patch
+WORKDIR /
+
 # Install Drush commands
 RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
 
