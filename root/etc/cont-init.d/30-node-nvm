@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv bash
+source $HOME/.nvm/nvm.sh && nvm use --silent $NODE_VERSION
