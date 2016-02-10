@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Setup nvm to provide access to node commands
+source $NVM_DIR/nvm.sh
+
 echo ''
 echo 'Node.js version:'
 node --version
