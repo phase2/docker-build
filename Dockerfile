@@ -60,12 +60,9 @@ RUN composer global update
 
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
-ENV NODE_VERSION 0.12
+ENV NODE_VERSION 4
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
-# Node 0.12
-RUN source $NVM_DIR/nvm.sh \
-      && nvm install $NODE_VERSION \
-      && npm install -g bower grunt-cli yo
+
 # Node 4.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 4 \

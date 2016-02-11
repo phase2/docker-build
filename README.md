@@ -13,8 +13,8 @@ Contains everything you need to work with Drupal, including use of tools such as
 
 ## Available Packages & Tools
 
-* Out of the box support for PHP 5.5, Ruby 1.9.3, and Node 0.12.7.
-* Global availability of Composer, NPM v2, Bower, Grunt, and Yeoman.
+* Out of the box support for PHP 5.5, Ruby 1.9.3, Node 4.x (LTS) and Node 5.x (stable).
+* Global availability of Composer, NPM, Bower, Grunt, and Yeoman.
 
 For more details of specific packages, libraries, and utilities, please see the
 [Dockerfile](https://bitbucket.org/phase2tech/p2docker/src/master/p2docker-devtools-build/Dockerfile).
@@ -61,6 +61,13 @@ full codebase, otherwise thrashing could result in reduced performance.
 Specify PHP's max execution time.
 
 * **Default**: `30`
+
+### NODE_VERSION
+
+Specify the version of Node.js to use.
+
+* **Default**: `4`
+* **Node 5.x**: `5`
 
 ## View the Source
 
