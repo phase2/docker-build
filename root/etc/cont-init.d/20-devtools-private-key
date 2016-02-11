@@ -26,11 +26,6 @@ else
   echo " "
   echo " $KEY_FILE"
   echo " "
-  echo "...or import a private key by setting the DEVTOOLS_PRIVATE_KEY "
-  echo "environment variable with:"
-  echo " "
-  echo " eval \$(~/Projects/_devtools_vm/bin/encode-key.sh)"
-  echo " "
   echo "##############################################################"
   exit  
 
