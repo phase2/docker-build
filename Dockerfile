@@ -11,6 +11,7 @@ RUN yum -y install \
       bzip2 \
       gcc-c++ \
       git \
+      httpd-tools \
       make \
       mariadb \
       nmap-ncat \
