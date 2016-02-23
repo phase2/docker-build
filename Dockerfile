@@ -98,10 +98,9 @@ WORKDIR /
 RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
 
 # Run the s6-based init.
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/init"]
 
 # Set up a standard volume for logs.
 VOLUME ["/var/log/services"]
 
-# 
 CMD [ "/devtools_versions.sh" ]
