@@ -15,7 +15,7 @@ echo '=> Handle DevTools Private Key'
 
 # Setup NVM
 echo "=> Setting node version to: $NODE_VERSION"
-bash --login -c "$HOME/.nvm/nvm.sh && nvm alias default $NODE_VERSION"
+bash --login -c "$NVM_DIR/nvm.sh && nvm alias default $NODE_VERSION"
 
 echo # blank line for readability
 
