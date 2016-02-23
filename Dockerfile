@@ -6,7 +6,7 @@ RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
 
 # Download confd.
-ENV CONFD_VERSION 0.10.0
+ENV CONFD_VERSION 0.11.0
 RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64" > /usr/bin/confd && \
     chmod +x /usr/bin/confd
 ENV CONFD_OPTS '--backend=env --onetime'
