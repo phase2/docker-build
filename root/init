@@ -1,23 +1,30 @@
 #!/bin/bash
+LOGFILE="/var/log/devtools.log"
+CONFD_LOGFILE="/var/log/confd.log"
+
+# Link file descriptor #6 with stdout, save stdout
+exec 6>&1 
+
+# Send stdout to the log file
+exec > $LOGFILE
 
 # Fix perms on /var/log/services
 find /var/log/services -print0 | xargs -0 -r chown nobody
 find /var/log/services -type d -print0 | xargs -0 -r chmod 755
 find /var/log/services -type f -print0 | xargs -0 -r chmod 644
 
-# Run confd??
-echo '=> Running confd to write configuration templates'
-confd $CONFD_OPTS
+# Run confd
+confd $CONFD_OPTS >& $CONFD_LOGFILE
 
-# Handle DevTools key
-echo '=> Handle DevTools Private Key'
+# Handle DevTools private key
 /devtools-key.sh
 
 # Setup NVM
 echo "=> Setting node version to: $NODE_VERSION"
 bash --login -c "$NVM_DIR/nvm.sh && nvm alias default $NODE_VERSION"
 
-echo # blank line for readability
+# Restore stdout and close file descriptor #6.
+exec 1>&6 6>&-
 
 # Run the CMD
 bash --login -c "$*"
