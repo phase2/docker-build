@@ -1,4 +1,15 @@
-FROM phase2/servicebase
+FROM centos:7
+
+# Install base packages.
+RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
+    yum -y update && \
+    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+
+# Download confd.
+ENV CONFD_VERSION 0.11.0
+RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64" > /usr/bin/confd && \
+    chmod +x /usr/bin/confd
+ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
       https://www.softwarecollections.org/en/scls/rhscl/php55/epel-7-x86_64/download/rhscl-php55-epel-7-x86_64.noarch.rpm \
@@ -15,7 +26,6 @@ RUN yum -y install \
       make \
       mariadb \
       nmap-ncat \
-      https://rpm.nodesource.com/pub_0.12/el/7/x86_64/nodejs-0.12.7-1nodesource.el7.centos.x86_64.rpm \
       patch \
       php55 \
       php55-php-bcmath \
@@ -60,13 +70,24 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bi
 RUN composer global require drush/drush:dev-master
 RUN composer global update
 
-# Update npm
-RUN npm install -g npm@^2
+# Install nvm, supported node versions, and default cli modules.
+ENV NVM_DIR $HOME/.nvm
+ENV NODE_VERSION 4
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 
-# Install Bower, Grunt (CLI), and Yeoman
-RUN npm install -g bower grunt-cli yo
+# Node 4.x (LTS)
+RUN source $NVM_DIR/nvm.sh \
+      && nvm install 4 \
+      && npm install -g bower grunt-cli yo
+# Node 5.x (stable)
+RUN source $NVM_DIR/nvm.sh \
+      && nvm install 5 \
+      && npm install -g bower grunt-cli yo
+# Set the default version which can be overridden by ENV.
+RUN source $NVM_DIR/nvm.sh \
+      && nvm alias default $NODE_VERSION
 
-ADD root /
+COPY root /
 
 # Patch Drush to not scan node & bower directories
 # https://github.com/drush-ops/drush/pull/1347#issuecomment-171301502
@@ -77,17 +98,10 @@ WORKDIR /
 # Install Drush commands
 RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
 
-# PHP Tuning
-ENV PHP_MEMORY_LIMIT        256m
-ENV PHP_OPCACHE_MEMORY      192
-ENV MAX_EXECUTION_TIME      30
+# Run the s6-based init.
+ENTRYPOINT ["/init"]
 
-# Init Configuration
-## Suppress init system logging.
-ENV S6_LOGGING=1
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=0
+# Set up a standard volume for logs.
+VOLUME ["/var/log/services"]
 
-# Suppress printing the exit code.
-RUN sed -i '/  if { s6-echo -- "${1} exited ${?}" }/d' /etc/s6/init/init-stage2
-
-CMD /devtools_versions.sh
+CMD [ "/devtools_versions.sh" ]
