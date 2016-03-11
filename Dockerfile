@@ -67,7 +67,7 @@ ENV HOME /root
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
 
 # Install Drush
-RUN composer global require drush/drush:dev-master
+RUN composer global require drush/drush:8.x
 RUN composer global update
 
 # Install nvm, supported node versions, and default cli modules.
@@ -88,12 +88,6 @@ RUN source $NVM_DIR/nvm.sh \
       && nvm alias default $NODE_VERSION
 
 COPY root /
-
-# Patch Drush to not scan node & bower directories
-# https://github.com/drush-ops/drush/pull/1347#issuecomment-171301502
-WORKDIR /root/.composer/vendor/drush/drush
-RUN git apply /tmp/drush-scan-directory-ignore-dirs.patch
-WORKDIR /
 
 # Install Drush commands
 RUN drush pm-download -yv registry_rebuild-7.x --destination=/etc/drush/commands
