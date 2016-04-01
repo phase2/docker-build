@@ -34,7 +34,14 @@ Default configuration in this file provides the following:
 
 * **Registry Rebuild**: `drush rr` is included by default.
 
-## NODE_VERSION
+## Environment Variables
+When you start the devtools-build image, you can adjust the configuration of the
+build instance by passing one or more environment variables on the docker run
+command-line or via your docker-compose manifest file.
+
+Additional environment variables for commonly customized settings will be considered.
+
+### NODE_VERSION
 
 Specify the version of Node.js to use.
 
