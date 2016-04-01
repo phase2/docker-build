@@ -34,35 +34,7 @@ Default configuration in this file provides the following:
 
 * **Registry Rebuild**: `drush rr` is included by default.
 
-## Environment Variables
-
-When you start the devtools-build image, you can adjust the configuration of the
-build instance by passing one or more environment variables on the docker run
-command-line or via your docker-compose manifest file.
-
-Additional environment variables for commonly customized settings will be considered.
-
-### PHP_MEMORY_LIMIT
-
-Override the default `memory_limit` for general PHP operations.
-
-* **Default**: `256m`
-
-### PHP_OPCACHE_MEMORY
-
-Specify the memory limit for Zend OpCache (`opcache.memory_consumption`). This
-setting should be carefully monitored to ensure it is large enough to hold the
-full codebase, otherwise thrashing could result in reduced performance.
-
-* **Default**: `192`
-
-### MAX_EXECUTION_TIME
-
-Specify PHP's max execution time.
-
-* **Default**: `30`
-
-### NODE_VERSION
+## NODE_VERSION
 
 Specify the version of Node.js to use.
 
