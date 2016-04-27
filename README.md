@@ -47,9 +47,3 @@ Specify the version of Node.js to use.
 
 * **Default**: `4`
 * **Node 5.x**: `5`
-
-## View the Source
-
-For more information about this image and its history, please see [the relevant manifest file (`p2docker-devtools-build`)](https://bitbucket.org/phase2tech/p2docker/src/master/p2docker-devtools-build/). This image is updated via pull requests to [the `p2docker` Bitbucket repo](https://bitbucket.org/phase2tech/p2docker).
-
-For detailed information about the virtual/transfer sizes and individual layers of each of the above supported tags, please see [the `mysql/tag-details.md` file](https://github.com/docker-library/docs/blob/master/mysql/tag-details.md) in [the `docker-library/docs` GitHub repo](https://github.com/docker-library/docs).
