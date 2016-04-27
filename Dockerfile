@@ -68,7 +68,9 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bi
 
 # Install Drush
 RUN composer global require drush/drush:8.x
+RUN composer global require drupal/console:@stable
 RUN composer global update
+RUN drupal init
 
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
