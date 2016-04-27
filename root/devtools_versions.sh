@@ -33,3 +33,6 @@ composer --version
 echo ''
 echo 'Drush version:'
 drush --version
+echo ''
+echo 'Drupal Console version:'
+drupal --version
