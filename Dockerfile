@@ -65,6 +65,8 @@ ENV HOME /root
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Install Drush
 RUN composer global require drush/drush:8.x
