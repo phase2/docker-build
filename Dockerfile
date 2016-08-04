@@ -12,8 +12,8 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
 ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
-      https://www.softwarecollections.org/en/scls/rhscl/php55/epel-7-x86_64/download/rhscl-php55-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/remi/php55more/epel-7-x86_64/download/remi-php55more-epel-7-x86_64.noarch.rpm \
+      centos-release-scl-rh \
+      https://www.softwarecollections.org/en/scls/remi/php56more/epel-7-x86_64/download/remi-php56more-epel-7-x86_64.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/ruby193/epel-7-x86_64/download/rhscl-ruby193-epel-7-x86_64.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
     yum -y update
@@ -27,21 +27,6 @@ RUN yum -y install \
       mariadb \
       nmap-ncat \
       patch \
-      php55 \
-      php55-php-bcmath \
-      php55-php-cli \
-      php55-php-devel \
-      php55-php-fpm \
-      php55-php-gd \
-      php55-php-mbstring \
-      php55-php-mysql \
-      php55-php-opcache \
-      php55-php-pdo \
-      php55-php-pear \
-      php55-php-pgsql \
-      php55-php-pecl-memcache \
-      php55-php-soap \
-      php55-php-xml \
       postgresql \
       ruby193 \
       ruby193-rubygems \
@@ -51,10 +36,27 @@ RUN yum -y install \
       # Necessary for drush
       which \
       # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig
+      fontconfig \
+      # Install PHP
+      rh-php56 \
+      rh-php56-php-gd \
+      rh-php56-php-xml \
+      rh-php56-php-pdo \
+      rh-php56-php-mysql \
+      rh-php56-php-mbstring \
+      rh-php56-php-fpm \
+      rh-php56-php-opcache \
+      rh-php56-php-pecl-memcache \
+      rh-php56-php-pecl-xdebug \
+      more-php56-php-mcrypt \
+      more-php56-php-pecl-xhprof
 
-# Ensure php55 and ruby193 binaries are in path
-ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# Ensure ruby193 binaries are in path
+ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Ensure PHP Binaries are in path
+RUN ln -sfv /opt/rh/rh-php56/root/usr/bin/* /usr/bin/ && \
+    ln -sfv /opt/rh/rh-php56/root/usr/sbin/* /usr/sbin/
 
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
