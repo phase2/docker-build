@@ -12,8 +12,7 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
 ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
-      https://www.softwarecollections.org/en/scls/rhscl/php55/epel-7-x86_64/download/rhscl-php55-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/remi/php55more/epel-7-x86_64/download/remi-php55more-epel-7-x86_64.noarch.rpm \
+      http://rpms.remirepo.net/enterprise/7/remi/x86_64/remi-release-7.1-3.el7.remi.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/ruby193/epel-7-x86_64/download/rhscl-ruby193-epel-7-x86_64.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
     yum -y update
@@ -27,21 +26,20 @@ RUN yum -y install \
       mariadb \
       nmap-ncat \
       patch \
-      php55 \
-      php55-php-bcmath \
-      php55-php-cli \
-      php55-php-devel \
-      php55-php-fpm \
-      php55-php-gd \
-      php55-php-mbstring \
-      php55-php-mysql \
-      php55-php-opcache \
-      php55-php-pdo \
-      php55-php-pear \
-      php55-php-pgsql \
-      php55-php-pecl-memcache \
-      php55-php-soap \
-      php55-php-xml \
+      php70 \
+      php70-php-gd \
+      php70-php-xml \
+      php70-php-pdo \
+      php70-php-mysql \
+      php70-php-mysqlnd \
+      php70-php-mbstring \
+      php70-php-fpm \
+      php70-php-opcache \
+      php70-php-pecl-memcache \
+      php70-php-pecl-xdebug \
+      php70-php-mcrypt \
+      # There is no PHP 7 support for XHProf yet.
+      # php70-php-pecl-xhprof \
       postgresql \
       ruby193 \
       ruby193-rubygems \
@@ -53,8 +51,12 @@ RUN yum -y install \
       # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
       fontconfig
 
-# Ensure php55 and ruby193 binaries are in path
-ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# Ensure ruby193 binaries are in path
+ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Ensure PHP binaries are in path
+RUN ln -sfv /opt/remi/php70/root/usr/bin/* /usr/bin/ && \
+    ln -sfv /opt/remi/php70/root/usr/sbin/* /usr/sbin/
 
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
