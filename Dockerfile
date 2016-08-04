@@ -54,7 +54,11 @@ RUN yum -y install \
       fontconfig
 
 # Ensure php55 and ruby193 binaries are in path
-ENV PATH /root/.composer/vendor/bin:/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Ensure PHP is in path
+RUN ln -sfv /opt/rh/php55/root/usr/bin/* /usr/bin/ && \
+    ln -sfv /opt/rh/php55/root/usr/sbin/* /usr/sbin/
 
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
