@@ -76,6 +76,9 @@ RUN composer global require drupal/console:@stable
 RUN composer global update
 RUN drupal init
 
+# Install Prestissimo for composer performance
+RUN composer global require "hirak/prestissimo:^0.3"
+
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
