@@ -1,5 +1,8 @@
 ; Enable xdebug extension module
+{{ $xdebug := getenv "PHP_XDEBUG" }}
+{{ if eq $xdebug "true" }}
 zend_extension=xdebug.so
+{{ end }}
 
 xdebug.coverage_enable=0
 xdebug.default_enable=1
