@@ -47,3 +47,10 @@ Specify the version of Node.js to use.
 
 * **Default**: `4`
 * **Node 5.x**: `5`
+
+### PHP_XDEBUG
+
+Specify if the xdebug extension should be enabled
+
+* **Default**: "false"
+* **Enable xdebug**: "true"
