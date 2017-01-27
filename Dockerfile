@@ -82,19 +82,24 @@ RUN composer global require "hirak/prestissimo:^0.3"
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 
 # Node 4.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 4 \
-      && npm install -g bower grunt-cli yo
+      && npm install -g bower grunt-cli gulp-cli yo
 # Node 5.x (stable)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 5 \
-      && npm install -g bower grunt-cli yo
+      && npm install -g bower grunt-cli gulp-cli yo
+# Node g.x (stable)
+RUN source $NVM_DIR/nvm.sh \
+      && nvm install 6 \
+      && npm install -g bower grunt-cli gulp-cli yo
 # Set the default version which can be overridden by ENV.
 RUN source $NVM_DIR/nvm.sh \
       && nvm alias default $NODE_VERSION
+RUN source $NVM_DIR/nvm.sh && nvm cache clear
 
 COPY root /
 
