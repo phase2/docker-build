@@ -26,20 +26,20 @@ RUN yum -y install \
       mariadb \
       nmap-ncat \
       patch \
-      php70 \
-      php70-php-gd \
-      php70-php-xml \
-      php70-php-pdo \
-      php70-php-mysql \
-      php70-php-mysqlnd \
-      php70-php-mbstring \
-      php70-php-fpm \
-      php70-php-opcache \
-      php70-php-pecl-memcache \
-      php70-php-pecl-xdebug \
-      php70-php-mcrypt \
+      php71 \
+      php71-php-gd \
+      php71-php-xml \
+      php71-php-pdo \
+      php71-php-mysql \
+      php71-php-mysqlnd \
+      php71-php-mbstring \
+      php71-php-fpm \
+      php71-php-opcache \
+      php71-php-pecl-memcache \
+      php71-php-pecl-xdebug \
+      php71-php-mcrypt \
       # There is no PHP 7 support for XHProf yet.
-      # php70-php-pecl-xhprof \
+      # php71-php-pecl-xhprof \
       postgresql \
       ruby193 \
       ruby193-rubygems \
@@ -55,8 +55,8 @@ RUN yum -y install \
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Ensure PHP binaries are in path
-RUN ln -sfv /opt/remi/php70/root/usr/bin/* /usr/bin/ && \
-    ln -sfv /opt/remi/php70/root/usr/sbin/* /usr/sbin/
+RUN ln -sfv /opt/remi/php71/root/usr/bin/* /usr/bin/ && \
+    ln -sfv /opt/remi/php71/root/usr/sbin/* /usr/sbin/
 
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64

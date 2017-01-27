@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t phase2/devtools-build:php70 .
+docker build -t phase2/devtools-build:php71 .
