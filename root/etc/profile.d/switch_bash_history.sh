@@ -11,5 +11,5 @@ if [ -e $TRIGGER_DIR ]; then
   if [ -e ~/.bash_history ]; then
     rm -f ~/.bash_history
   fi
-  ln -s $TRIGGER_DIR/.bash_history ~/.bash_history
+  ln -sf $TRIGGER_DIR/.bash_history ~/.bash_history
 fi
