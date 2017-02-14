@@ -13,7 +13,8 @@ Contains everything you need to work with Drupal, including use of tools such as
 
 ## Available Packages & Tools
 
-* Out of the box support for PHP 5.5, Ruby 1.9.3, Node 4.x (LTS) and Node 5.x (stable).
+* Out of the box support for PHP (version based on tag), Ruby 1.9.3 and Node versions
+4.x (LTS), 5.x (stable) and 6.x (LTS) based on environment toggle (see below).
 * Global availability of Composer, NPM, Bower, Grunt, and Yeoman.
 
 For more details of specific packages, libraries, and utilities, please see the
@@ -47,6 +48,7 @@ Specify the version of Node.js to use.
 
 * **Default**: `4`
 * **Node 5.x**: `5`
+* **Node 6.x**: `6`
 
 ### PHP_XDEBUG
 
@@ -54,3 +56,11 @@ Specify if the xdebug extension should be enabled
 
 * **Default**: "false"
 * **Enable xdebug**: "true"
+
+## Other Conveniences
+
+### Bash history persistence between invocations
+
+If you would like your bash history preserved, provide a volume mount to a persistent
+data location at /root/bash and initialization scripts will ensure your .bash\_history
+file is written there. For example `/data/PROJECT/bash:/root/bash`
