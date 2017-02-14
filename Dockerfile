@@ -1,9 +1,11 @@
 FROM centos:7
 
 # Install base packages.
-RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
+RUN yum -y install epel-release centos-release-scl yum-plugin-ovl deltarpm && \
     yum -y update && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms
 
 # Download confd.
 ENV CONFD_VERSION 0.11.0
@@ -12,9 +14,7 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
 ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
-      http://rpms.remirepo.net/enterprise/7/remi/x86_64/remi-release-7.1-3.el7.remi.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/rhscl/ruby193/epel-7-x86_64/download/rhscl-ruby193-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
+      https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     yum -y update
 
 RUN yum -y install \
@@ -98,7 +98,7 @@ RUN source $NVM_DIR/nvm.sh \
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 5 \
       && npm install -g bower grunt-cli gulp-cli yo
-# Node g.x (stable)
+# Node 6.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 6 \
       && npm install -g bower grunt-cli gulp-cli yo
