@@ -1,7 +1,7 @@
 FROM centos:7
 
 # Install base packages.
-RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
+RUN yum -y install epel-release centos-release-scl yum-plugin-ovl deltarpm && \
     yum -y update && \
     yum -y install sudo ssh curl less vim-minimal dnsutils openssl
 
@@ -12,11 +12,10 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
 ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
-      https://www.softwarecollections.org/en/scls/rhscl/php55/epel-7-x86_64/download/rhscl-php55-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/remi/php55more/epel-7-x86_64/download/remi-php55more-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/rhscl/ruby193/epel-7-x86_64/download/rhscl-ruby193-epel-7-x86_64.noarch.rpm \
-      https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
+      https://www.softwarecollections.org/en/scls/remi/php55more/epel-7-x86_64/download/remi-php55more-epel-7-x86_64.noarch.rpm && \
     yum -y update
+
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms
 
 RUN yum -y install \
       bzip2 \
@@ -75,22 +74,33 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install Drush
 RUN composer global require drush/drush:8.x
 RUN composer global require drupal/console:@stable
+RUN curl https://drupalconsole.com/installer -L -o /usr/bin/drupal && chmod +x /usr/bin/drupal
+RUN drupal self-update
+RUN drupal init -n
+
+# Install Prestissimo for composer performance
+RUN composer global require "hirak/prestissimo:^0.3"
+
+# Update composer libraries
 RUN composer global update
-RUN drupal init
 
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 
 # Node 4.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 4 \
-      && npm install -g bower grunt-cli yo
+      && npm install -g bower grunt-cli gulp-cli yo
 # Node 5.x (stable)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 5 \
-      && npm install -g bower grunt-cli yo
+      && npm install -g bower grunt-cli gulp-cli yo
+# Node 6.x (LTS)
+RUN source $NVM_DIR/nvm.sh \
+      && nvm install 6 \
+      && npm install -g bower grunt-cli gulp-cli yo
 # Set the default version which can be overridden by ENV.
 RUN source $NVM_DIR/nvm.sh \
       && nvm alias default $NODE_VERSION
