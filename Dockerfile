@@ -73,8 +73,15 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install Drush
 RUN composer global require drush/drush:8.x
 RUN composer global require drupal/console:@stable
+RUN curl https://drupalconsole.com/installer -L -o /usr/bin/drupal && chmod +x /usr/bin/drupal
+RUN drupal self-update
+RUN drupal init -n
+
+# Install Prestissimo for composer performance
+RUN composer global require "hirak/prestissimo:^0.3"
+
+# Update composer libraries
 RUN composer global update
-RUN drupal init
 
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
