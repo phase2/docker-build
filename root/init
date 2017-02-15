@@ -1,5 +1,5 @@
 #!/bin/bash
-LOGFILE="/var/log/devtools.log"
+LOGFILE="/var/log/outrigger.log"
 CONFD_LOGFILE="/var/log/confd.log"
 
 # Link file descriptor #6 with stdout, save stdout
@@ -16,8 +16,8 @@ find /var/log/services -type f -print0 | xargs -0 -r chmod 644
 # Run confd
 confd $CONFD_OPTS >& $CONFD_LOGFILE
 
-# Handle DevTools private key
-/devtools-key.sh
+# Handle Outrigger private key
+/outrigger-key.sh
 
 # Setup NVM
 echo "=> Setting node version to: $NODE_VERSION"
