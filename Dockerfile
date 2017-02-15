@@ -118,4 +118,4 @@ ENTRYPOINT ["/init"]
 # Set up a standard volume for logs.
 VOLUME ["/var/log/services"]
 
-CMD [ "/devtools_versions.sh" ]
+CMD [ "/versions.sh" ]
