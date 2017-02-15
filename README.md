@@ -3,7 +3,7 @@
 ## Description
 
 This image provides the many development tools necessary to build applications
-the Phase2 way, bundled with a wide array of tools useful for development and
+the Outrigger way, bundled with a wide array of tools useful for development and
 troubleshooting via the command-line interface. While it is possible to directly
 connect via our "web" containers, this is the preferred way to perform "server work".
 
@@ -18,7 +18,7 @@ Contains everything you need to work with Drupal, including use of tools such as
 * Global availability of Composer, NPM, Bower, Grunt, and Yeoman.
 
 For more details of specific packages, libraries, and utilities, please see the
-[Dockerfile](https://bitbucket.org/phase2tech/p2docker/src/master/p2docker-devtools-build/Dockerfile).
+[Dockerfile](https://github.com/phase2/docker-build/blob/php56/Dockerfile).
 
 ## Drush (Drupal Shell) Configuration
 
@@ -36,7 +36,7 @@ Default configuration in this file provides the following:
 * **Registry Rebuild**: `drush rr` is included by default.
 
 ## Environment Variables
-When you start the devtools-build image, you can adjust the configuration of the
+When you start the `outrigger/build` image, you can adjust the configuration of the
 build instance by passing one or more environment variables on the docker run
 command-line or via your docker-compose manifest file.
 

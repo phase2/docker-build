@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KEY_BASE=/root/.ssh
-KEY_FILE=$KEY_BASE/devtools.key
+KEY_FILE=$KEY_BASE/outrigger.key
 
 # First check to see if a volume mounted keyfile with a specific name exists
 # If that file doesn't exit, was the key passed in via an environment variable?
@@ -12,7 +12,7 @@ if [ -e $KEY_FILE ]; then
 else
 
   echo "##############################################################"
-  echo "Dev Tools Private Key was not set. You will not be able to  "
+  echo "Outrigger Private Key was not set. You will not be able to  "
   echo "clone private repositories. "
   echo " "
   echo "You can import a private key by volume mounting a key at "
