@@ -57,7 +57,7 @@ configurations offered by this image.
 
 * `NODE_VERSION`: [`4`|`5`|`6`] Defaults to 4. Selects the major version of Node
   to make available to all tools via nvm. The latest minor release as of the image build will be used.
-* `PHP_XDEBUG`: ["true"|"false"] Specify whether the PHP Xdebug extension should be enabled.
+* `PHP_XDEBUG`: [`"true"`|`"false"`] Specify whether the PHP Xdebug extension should be enabled.
 
 ## Maintainers
 
