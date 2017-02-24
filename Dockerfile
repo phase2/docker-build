@@ -49,7 +49,8 @@ RUN yum -y install \
       # Necessary for drush
       which \
       # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig
+      fontconfig \
+      pv
 
 # Ensure ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
