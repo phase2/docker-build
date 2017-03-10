@@ -23,6 +23,7 @@ RUN yum -y install \
       gcc-c++ \
       git \
       httpd-tools \
+      jq \
       make \
       mariadb \
       nmap-ncat \
