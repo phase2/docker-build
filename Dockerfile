@@ -42,6 +42,7 @@ RUN yum -y install \
       # There is no PHP 7 support for XHProf yet.
       # php70-php-pecl-xhprof \
       postgresql \
+      pv \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
