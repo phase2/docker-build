@@ -29,6 +29,7 @@ RUN yum -y install \
       nmap-ncat \
       patch \
       postgresql \
+      pv \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
