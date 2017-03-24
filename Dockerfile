@@ -77,7 +77,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer global require drush/drush:8.x
 
 # Install Drupal Console / Laucher
-RUN composer global require drupal/console:"1.0.0-rc16"
+RUN composer global require drupal/console:@stable
 RUN curl https://drupalconsole.com/installer -L -o /usr/bin/drupal && chmod +x /usr/bin/drupal
 RUN drupal self-update
 RUN drupal init -n
