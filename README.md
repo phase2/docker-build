@@ -1,6 +1,9 @@
-![logo](https://www.phase2technology.com/wp-content/uploads/2015/06/logo-retina.png)
+# Outrigger Build
 
-## Description
+> An image loaded with most of the tools needed for modern web development
+
+[![](https://images.microbadger.com/badges/version/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
 
 This image provides the many development tools necessary to build applications
 the Outrigger way, bundled with a wide array of tools useful for development and
@@ -64,3 +67,7 @@ Specify if the xdebug extension should be enabled
 If you would like your bash history preserved, provide a volume mount to a persistent
 data location at /root/bash and initialization scripts will ensure your .bash\_history
 file is written there. For example `/data/PROJECT/bash:/root/bash`
+
+## Maintainers
+
+![Phase2 Logo](https://www.phase2technology.com/wp-content/uploads/2015/06/logo-retina.png)
