@@ -2,8 +2,8 @@
 
 > The Outrigger Build image provides a command-line toolkit for PHP & Node development with Drupal support.
 
-[![](https://images.microbadger.com/badges/version/outrigger/build.svg)](https://microbadger.com/images/outrigger/build "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/outrigger/build.svg)](https://microbadger.com/images/outrigger/build "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
 
 This image provides the many development tools necessary to build applications
 the Outrigger way, bundled with a wide array of tools useful for development and
