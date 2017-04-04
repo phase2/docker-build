@@ -68,6 +68,10 @@ ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 # Ensure $HOME is set
 ENV HOME /root
 
+# Configure Git
+# https://git-scm.com/docs/git-config#git-config-corepreloadIndex
+RUN git config --global core.preloadindex true
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
