@@ -17,10 +17,14 @@ RUN yum -y install \
       https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     yum -y update
 
+# Add the IUS repository. This is needed for git2.
+RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
+    rpm -Uvh /usr/local/ius-release.rpm
+
 RUN yum -y install \
       bzip2 \
       gcc-c++ \
-      git \
+      git2u-all \
       httpd-tools \
       jq \
       make \
