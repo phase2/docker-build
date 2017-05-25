@@ -28,6 +28,7 @@ RUN yum -y install \
       nmap-ncat \
       patch \
       php71 \
+      php71-php-devel \
       php71-php-gd \
       php71-php-xml \
       php71-php-pdo \
@@ -60,6 +61,17 @@ ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin
 RUN ln -sfv /opt/remi/php71/root/usr/bin/* /usr/bin/ && \
     ln -sfv /opt/remi/php71/root/usr/sbin/* /usr/sbin/
 
+# Install PHPRedis extension
+ENV PHPREDIS_VERSION 3.1.2
+RUN curl -L -o /tmp/phpredis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" && \
+    tar -xzf /tmp/phpredis.tar.gz -C /tmp && \
+    rm /tmp/phpredis.tar.gz && \
+    cd "/tmp/phpredis-$PHPREDIS_VERSION" && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install
+
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
 ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
@@ -75,12 +87,6 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install Drush
 RUN composer global require drush/drush:8.x
 
-# Install Drupal Console / Laucher
-RUN composer global require drupal/console:@stable
-RUN curl https://drupalconsole.com/installer -L -o /usr/bin/drupal && chmod +x /usr/bin/drupal
-RUN drupal self-update
-RUN drupal init -n
-
 # Install Prestissimo for composer performance
 RUN composer global require "hirak/prestissimo:^0.3"
 
@@ -90,7 +96,8 @@ RUN composer global update
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+RUN chmod +x $HOME/.nvm/nvm.sh
 
 # Node 4.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
