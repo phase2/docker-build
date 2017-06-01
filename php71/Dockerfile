@@ -22,25 +22,28 @@ RUN yum -y install \
       gcc-c++ \
       git \
       httpd-tools \
+      jq \
       make \
       mariadb \
       nmap-ncat \
       patch \
-      php70 \
-      php70-php-gd \
-      php70-php-xml \
-      php70-php-pdo \
-      php70-php-mysql \
-      php70-php-mysqlnd \
-      php70-php-mbstring \
-      php70-php-fpm \
-      php70-php-opcache \
-      php70-php-pecl-memcache \
-      php70-php-pecl-xdebug \
-      php70-php-mcrypt \
+      php71 \
+      php71-php-devel \
+      php71-php-gd \
+      php71-php-xml \
+      php71-php-pdo \
+      php71-php-mysql \
+      php71-php-mysqlnd \
+      php71-php-mbstring \
+      php71-php-fpm \
+      php71-php-opcache \
+      php71-php-pecl-memcache \
+      php71-php-pecl-xdebug \
+      php71-php-mcrypt \
       # There is no PHP 7 support for XHProf yet.
-      # php70-php-pecl-xhprof \
+      # php71-php-pecl-xhprof \
       postgresql \
+      pv \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
@@ -55,8 +58,19 @@ RUN yum -y install \
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Ensure PHP binaries are in path
-RUN ln -sfv /opt/remi/php70/root/usr/bin/* /usr/bin/ && \
-    ln -sfv /opt/remi/php70/root/usr/sbin/* /usr/sbin/
+RUN ln -sfv /opt/remi/php71/root/usr/bin/* /usr/bin/ && \
+    ln -sfv /opt/remi/php71/root/usr/sbin/* /usr/sbin/
+
+# Install PHPRedis extension
+ENV PHPREDIS_VERSION 3.1.2
+RUN curl -L -o /tmp/phpredis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" && \
+    tar -xzf /tmp/phpredis.tar.gz -C /tmp && \
+    rm /tmp/phpredis.tar.gz && \
+    cd "/tmp/phpredis-$PHPREDIS_VERSION" && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install
 
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
@@ -73,12 +87,6 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install Drush
 RUN composer global require drush/drush:8.x
 
-# Install Drupal Console / Laucher
-RUN composer global require drupal/console:@stable
-RUN curl https://drupalconsole.com/installer -L -o /usr/bin/drupal && chmod +x /usr/bin/drupal
-RUN drupal self-update
-RUN drupal init -n
-
 # Install Prestissimo for composer performance
 RUN composer global require "hirak/prestissimo:^0.3"
 
@@ -88,7 +96,8 @@ RUN composer global update
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+RUN chmod +x $HOME/.nvm/nvm.sh
 
 # Node 4.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
@@ -98,7 +107,7 @@ RUN source $NVM_DIR/nvm.sh \
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 5 \
       && npm install -g bower grunt-cli gulp-cli yo
-# Node g.x (stable)
+# Node 6.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 6 \
       && npm install -g bower grunt-cli gulp-cli yo

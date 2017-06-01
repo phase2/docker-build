@@ -1,0 +1,23 @@
+; Enable xdebug extension module
+{{ $xdebug := getenv "PHP_XDEBUG" }}
+{{ if eq $xdebug "true" }}
+zend_extension=xdebug.so
+{{ end }}
+
+xdebug.coverage_enable=0
+xdebug.default_enable=1
+
+xdebug.remote_enable=1
+xdebug.remote_connect_back=1
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_handler=dbgp
+xdebug.remote_log=/tmp/xdebug.log
+xdebug.remote_autostart=true
+
+xdebug.idekey="DEVTOOLS"
+
+; Drupal 8 requires this be set to 256.
+xdebug.max_nesting_level=256
+
+; see http://xdebug.org/docs/all_settings
