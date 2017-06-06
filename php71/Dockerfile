@@ -103,13 +103,13 @@ RUN chmod +x $HOME/.nvm/nvm.sh
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 4 \
       && npm install -g bower grunt-cli gulp-cli yo
-# Node 5.x (stable)
-RUN source $NVM_DIR/nvm.sh \
-      && nvm install 5 \
-      && npm install -g bower grunt-cli gulp-cli yo
 # Node 6.x (LTS)
 RUN source $NVM_DIR/nvm.sh \
       && nvm install 6 \
+      && npm install -g bower grunt-cli gulp-cli yo
+# Node 8.x (LTS)
+RUN source $NVM_DIR/nvm.sh \
+      && nvm install 8 \
       && npm install -g bower grunt-cli gulp-cli yo
 # Set the default version which can be overridden by ENV.
 RUN source $NVM_DIR/nvm.sh \
