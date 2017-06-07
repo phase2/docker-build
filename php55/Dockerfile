@@ -42,6 +42,7 @@ RUN yum -y install \
       php55-php-soap \
       php55-php-xml \
       postgresql \
+      rsync \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \

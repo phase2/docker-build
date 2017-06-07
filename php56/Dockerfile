@@ -30,6 +30,7 @@ RUN yum -y install \
       patch \
       postgresql \
       pv \
+      rsync \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
