@@ -48,6 +48,7 @@ RUN yum -y install \
       # php70-php-pecl-xhprof \
       postgresql \
       pv \
+      rsync \
       ruby193 \
       ruby193-rubygems \
       ruby193-ruby-devel \
