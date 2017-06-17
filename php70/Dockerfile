@@ -22,42 +22,44 @@ RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-
     rpm -Uvh /usr/local/ius-release.rpm
 
 RUN yum -y install \
-      bzip2 \
-      gcc-c++ \
-      git2u-all \
-      httpd-tools \
-      jq \
-      make \
-      mariadb \
-      nmap-ncat \
-      patch \
-      php70 \
-      php70-php-devel \
-      php70-php-gd \
-      php70-php-xml \
-      php70-php-pdo \
-      php70-php-mysql \
-      php70-php-mysqlnd \
-      php70-php-mbstring \
-      php70-php-fpm \
-      php70-php-opcache \
-      php70-php-pecl-memcache \
-      php70-php-pecl-xdebug \
-      php70-php-mcrypt \
-      # There is no PHP 7 support for XHProf yet.
-      # php70-php-pecl-xhprof \
-      postgresql \
-      pv \
-      rsync \
-      ruby193 \
-      ruby193-rubygems \
-      ruby193-ruby-devel \
-      sendmail \
-      unzip \
-      # Necessary for drush
-      which \
-      # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig
+    # Install PHP
+    php70 \
+    php70-php-devel \
+    php70-php-gd \
+    php70-php-xml \
+    php70-php-pdo \
+    php70-php-mysql \
+    php70-php-mysqlnd \
+    php70-php-mbstring \
+    php70-php-fpm \
+    php70-php-opcache \
+    php70-php-pecl-memcache \
+    php70-php-pecl-xdebug \
+    php70-php-mcrypt \
+    # Install Ruby
+    ruby193 \
+    ruby193-rubygems \
+    ruby193-ruby-devel \
+    # Install Miscellaneous Tools
+    bzip2 \
+    gcc-c++ \
+    git2u-all \
+    httpd-tools \
+    jq \
+    make \
+    mariadb \
+    nmap-ncat \
+    patch \
+    postgresql \
+    pv \
+    rsync \
+    sendmail \
+    unzip \
+    # Necessary for drush
+    which \
+    # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
+    fontconfig \
+    && yum clean all
 
 # Ensure ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

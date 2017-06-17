@@ -17,43 +17,49 @@ RUN yum -y install \
       https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     yum -y update
 
+# Add the IUS repository. This is needed for git2.
+RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
+    rpm -Uvh /usr/local/ius-release.rpm
+
 RUN yum -y install \
-      bzip2 \
-      gcc-c++ \
-      git \
-      httpd-tools \
-      jq \
-      make \
-      mariadb \
-      nmap-ncat \
-      patch \
-      php71 \
-      php71-php-devel \
-      php71-php-gd \
-      php71-php-xml \
-      php71-php-pdo \
-      php71-php-mysql \
-      php71-php-mysqlnd \
-      php71-php-mbstring \
-      php71-php-fpm \
-      php71-php-opcache \
-      php71-php-pecl-memcache \
-      php71-php-pecl-xdebug \
-      php71-php-mcrypt \
-      # There is no PHP 7 support for XHProf yet.
-      # php71-php-pecl-xhprof \
-      postgresql \
-      pv \
-      rsync \
-      ruby193 \
-      ruby193-rubygems \
-      ruby193-ruby-devel \
-      sendmail \
-      unzip \
-      # Necessary for drush
-      which \
-      # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig
+    # Install PHP
+    php71 \
+    php71-php-devel \
+    php71-php-gd \
+    php71-php-xml \
+    php71-php-pdo \
+    php71-php-mysql \
+    php71-php-mysqlnd \
+    php71-php-mbstring \
+    php71-php-fpm \
+    php71-php-opcache \
+    php71-php-pecl-memcache \
+    php71-php-pecl-xdebug \
+    php71-php-mcrypt \
+    # Install Ruby
+    ruby193 \
+    ruby193-rubygems \
+    ruby193-ruby-devel
+    # Install Miscellaneous Tools
+    bzip2 \
+    gcc-c++ \
+    git2u-all \
+    httpd-tools \
+    jq \
+    make \
+    mariadb \
+    nmap-ncat \
+    patch \
+    postgresql \
+    pv \
+    rsync \
+    sendmail \
+    unzip \
+    # Necessary for drush
+    which \
+    # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
+    fontconfig \
+    && yum clean all
 
 # Ensure ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -79,6 +85,10 @@ ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 
 # Ensure $HOME is set
 ENV HOME /root
+
+# Configure Git
+# https://git-scm.com/docs/git-config#git-config-corepreloadIndex
+RUN git config --global core.preloadindex true
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer

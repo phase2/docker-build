@@ -11,6 +11,10 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
     chmod +x /usr/bin/confd
 ENV CONFD_OPTS '--backend=env --onetime'
 
+# Add the IUS repository. This is needed for git2.
+RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
+    rpm -Uvh /usr/local/ius-release.rpm
+
 RUN yum -y install \
       centos-release-scl-rh \
       https://www.softwarecollections.org/en/scls/remi/php56more/epel-7-x86_64/download/remi-php56more-epel-7-x86_64.noarch.rpm \
@@ -18,41 +22,48 @@ RUN yum -y install \
       https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
     yum -y update
 
+# Add the IUS repository. This is needed for git2.
+RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
+    rpm -Uvh /usr/local/ius-release.rpm
+
 RUN yum -y install \
-      bzip2 \
-      gcc-c++ \
-      git \
-      httpd-tools \
-      jq \
-      make \
-      mariadb \
-      nmap-ncat \
-      patch \
-      postgresql \
-      pv \
-      rsync \
-      ruby193 \
-      ruby193-rubygems \
-      ruby193-ruby-devel \
-      sendmail \
-      unzip \
-      # Necessary for drush
-      which \
-      # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig \
-      # Install PHP
-      rh-php56 \
-      rh-php56-php-gd \
-      rh-php56-php-xml \
-      rh-php56-php-pdo \
-      rh-php56-php-mysql \
-      rh-php56-php-mbstring \
-      rh-php56-php-fpm \
-      rh-php56-php-opcache \
-      rh-php56-php-pecl-memcache \
-      rh-php56-php-pecl-xdebug \
-      more-php56-php-mcrypt \
-      more-php56-php-pecl-xhprof
+    # Install PHP
+    rh-php56 \
+    rh-php56-php-gd \
+    rh-php56-php-xml \
+    rh-php56-php-pdo \
+    rh-php56-php-mysql \
+    rh-php56-php-mbstring \
+    rh-php56-php-fpm \
+    rh-php56-php-opcache \
+    rh-php56-php-pecl-memcache \
+    rh-php56-php-pecl-xdebug \
+    more-php56-php-mcrypt \
+    more-php56-php-pecl-xhprof
+    # Install Ruby
+    ruby193 \
+    ruby193-rubygems \
+    ruby193-ruby-devel
+    # Install Miscellaneous Tools
+    bzip2 \
+    gcc-c++ \
+    git2u-all \
+    httpd-tools \
+    jq \
+    make \
+    mariadb \
+    nmap-ncat \
+    patch \
+    postgresql \
+    pv \
+    rsync \
+    sendmail \
+    unzip \
+    # Necessary for drush
+    which \
+    # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
+    fontconfig \
+    && yum clean all
 
 # Ensure ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -61,12 +72,27 @@ ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin
 RUN ln -sfv /opt/rh/rh-php56/root/usr/bin/* /usr/bin/ && \
     ln -sfv /opt/rh/rh-php56/root/usr/sbin/* /usr/sbin/
 
+# Install PHPRedis extension
+ENV PHPREDIS_VERSION 3.1.2
+RUN curl -L -o /tmp/phpredis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" && \
+    tar -xzf /tmp/phpredis.tar.gz -C /tmp && \
+    rm /tmp/phpredis.tar.gz && \
+    cd "/tmp/phpredis-$PHPREDIS_VERSION" && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install
+
 # Enable other ruby193 SCL config
 ENV LD_LIBRARY_PATH /opt/rh/ruby193/root/usr/lib64
 ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 
 # Ensure $HOME is set
 ENV HOME /root
+
+# Configure Git
+# https://git-scm.com/docs/git-config#git-config-corepreloadIndex
+RUN git config --global core.preloadindex true
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
