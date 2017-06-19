@@ -43,6 +43,7 @@ RUN yum -y install \
       php70-php-opcache \
       php70-php-pecl-memcache \
       php70-php-pecl-xdebug \
+      php70-php-posix \
       php70-php-mcrypt \
       # There is no PHP 7 support for XHProf yet.
       # php70-php-pecl-xhprof \
