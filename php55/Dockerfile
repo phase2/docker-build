@@ -17,41 +17,51 @@ RUN yum -y install \
 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms
 
+# Add the IUS repository. This is needed for git2.
+RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
+    rpm -Uvh /usr/local/ius-release.rpm
+
 RUN yum -y install \
-      bzip2 \
-      gcc-c++ \
-      git \
-      httpd-tools \
-      make \
-      mariadb \
-      nmap-ncat \
-      patch \
-      php55 \
-      php55-php-bcmath \
-      php55-php-cli \
-      php55-php-devel \
-      php55-php-fpm \
-      php55-php-gd \
-      php55-php-mbstring \
-      php55-php-mysql \
-      php55-php-opcache \
-      php55-php-pdo \
-      php55-php-pear \
-      php55-php-pgsql \
-      php55-php-pecl-memcache \
-      php55-php-soap \
-      php55-php-xml \
-      postgresql \
-      rsync \
-      ruby193 \
-      ruby193-rubygems \
-      ruby193-ruby-devel \
-      sendmail \
-      unzip \
-      # Necessary for drush
-      which \
-      # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
-      fontconfig
+    # Install PHP
+    php55 \
+    php55-php-bcmath \
+    php55-php-cli \
+    php55-php-devel \
+    php55-php-fpm \
+    php55-php-gd \
+    php55-php-mbstring \
+    php55-php-mysql \
+    php55-php-opcache \
+    php55-php-pdo \
+    php55-php-pear \
+    php55-php-pgsql \
+    php55-php-pecl-memcache \
+    php55-php-soap \
+    php55-php-xml \
+    # Install Ruby
+    ruby193 \
+    ruby193-rubygems \
+    ruby193-ruby-devel
+    # Install Miscellaneous Tools
+    bzip2 \
+    gcc-c++ \
+    git2u-all \
+    httpd-tools \
+    jq \
+    make \
+    mariadb \
+    nmap-ncat \
+    patch \
+    pv \
+    postgresql \
+    rsync \
+    sendmail \
+    unzip \
+    # Necessary for drush
+    which \
+    # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
+    fontconfig \
+    && yum clean all
 
 # Ensure php55 and ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -66,6 +76,10 @@ ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 
 # Ensure $HOME is set
 ENV HOME /root
+
+# Configure Git
+# https://git-scm.com/docs/git-config#git-config-corepreloadIndex
+RUN git config --global core.preloadindex true
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
