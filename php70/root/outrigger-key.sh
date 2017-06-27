@@ -3,9 +3,10 @@
 KEY_BASE=/root/.ssh
 KEY_FILE=$KEY_BASE/outrigger.key
 
-# First check to see if a volume mounted keyfile with a specific name exists
-# If that file doesn't exit, was the key passed in via an environment variable?
-if [ -e $KEY_FILE ]; then
+# First check to see if a volume mounted keyfile with a specific name exists.
+# If the source on a bind mount does not exist it will be created as an empty directory.
+if [ -e $KEY_FILE ] && [ ! -d $KEY_FILE ]
+then
 
   echo "KEY_FILE found. Setting up key..."
 
