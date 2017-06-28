@@ -39,7 +39,7 @@ RUN yum -y install \
     # Install Ruby
     ruby193 \
     ruby193-rubygems \
-    ruby193-ruby-devel
+    ruby193-ruby-devel \
     # Install Miscellaneous Tools
     bzip2 \
     gcc-c++ \
