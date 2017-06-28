@@ -25,6 +25,7 @@ RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-
 RUN yum -y install \
     # Install PHP
     rh-php56 \
+    rh-php56-php-devel \
     rh-php56-php-gd \
     rh-php56-php-xml \
     rh-php56-php-pdo \
