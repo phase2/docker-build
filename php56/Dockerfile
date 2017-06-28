@@ -11,10 +11,6 @@ RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_
     chmod +x /usr/bin/confd
 ENV CONFD_OPTS '--backend=env --onetime'
 
-# Add the IUS repository. This is needed for git2.
-RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
-    rpm -Uvh /usr/local/ius-release.rpm
-
 RUN yum -y install \
       centos-release-scl-rh \
       https://www.softwarecollections.org/en/scls/remi/php56more/epel-7-x86_64/download/remi-php56more-epel-7-x86_64.noarch.rpm \
