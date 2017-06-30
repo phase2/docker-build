@@ -98,23 +98,28 @@ RUN composer global update
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
 ENV NODE_VERSION 4
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+RUN (curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash) && \
+  chmod +x $HOME/.nvm/nvm.sh
 
 # Node 4.x (LTS)
-RUN source $NVM_DIR/nvm.sh \
-      && nvm install 4 \
-      && npm install -g bower grunt-cli gulp-cli yo
-# Node 5.x (stable)
-RUN source $NVM_DIR/nvm.sh \
-      && nvm install 5 \
-      && npm install -g bower grunt-cli gulp-cli yo
-# Node 6.x (LTS)
-RUN source $NVM_DIR/nvm.sh \
-      && nvm install 6 \
-      && npm install -g bower grunt-cli gulp-cli yo
+RUN source $NVM_DIR/nvm.sh && \
+  nvm install 4 && \
+  npm install -g bower grunt-cli gulp-cli && \
+  npm cache clean
+# Node 6.x (stable)
+RUN source $NVM_DIR/nvm.sh && \
+  nvm install 6 && \
+  npm install -g bower grunt-cli gulp-cli && \
+  npm cache clean
+# Node 8.x (stable)
+RUN source $NVM_DIR/nvm.sh && \
+  nvm install 8 && \
+  npm install -g bower grunt-cli gulp-cli && \
+  # npm v5 recommends not clearing caches because of improved consistency.
+  # This is not an argument that applies to Docker image layer size.
+  npm cache clean --force
 # Set the default version which can be overridden by ENV.
-RUN source $NVM_DIR/nvm.sh \
-      && nvm alias default $NODE_VERSION
+RUN source $NVM_DIR/nvm.sh && nvm alias default $NODE_VERSION && nvm cache clear
 
 COPY root /
 
