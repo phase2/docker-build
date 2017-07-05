@@ -86,14 +86,11 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bi
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Install Drush
-RUN composer global require drush/drush:8.x
-
-# Install Prestissimo for composer performance
-RUN composer global require "hirak/prestissimo:^0.3"
-
-# Update composer libraries
-RUN composer global update
+# Add global composer dependencies.
+# Drush for drupal development.
+# prestissimo for parallelized composer download operations.
+RUN composer global require drush/drush:8.x hirak/prestissimo:^0.3 && \
+  composer clear-cache
 
 # Install nvm, supported node versions, and default cli modules.
 ENV NVM_DIR $HOME/.nvm
