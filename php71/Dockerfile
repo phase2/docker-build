@@ -35,6 +35,7 @@ RUN yum -y install \
     php71-php-opcache \
     php71-php-pecl-memcache \
     php71-php-pecl-xdebug \
+    php71-php-posix \
     php71-php-mcrypt \
     # Install Ruby
     ruby193 \
