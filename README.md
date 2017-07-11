@@ -57,6 +57,21 @@ offered by this image.
   to make available to all tools via nvm. The latest minor release as of the image build will be used.
 * `PHP_XDEBUG`: [`"true"`|`"false"`] Specify whether the PHP Xdebug extension should be enabled.
 
+### Default Tools Configuration
+
+A number of tools that are built into the Build image can be further configured by environment variables. These can be overridden
+by your `docker run` command or your docker-compose configuration. For more details on these variables or other environment variable
+options, check the configuration documentation for individual tools.
+
+* **Composer**:
+    * `COMPOSER_ALLOW_SUPERUSER`: [`1`] Run composer as the root user.
+* **npm**:
+    * `NPM_CONFIG_UNSAFE_PERM`: [`true`] Run npm commands with the --unsafe-perm flag. This makes behavior of running npm as root more consistent when using npm scripts that call other npm scripts.
+* **bower**:
+    * `BOWER_ALLOW_ROOT`: [`true`] Bower will refuse to execute when run as root without the --allow-root flag. This sets that as a persisting configuration.
+
+Unless you are modifying a customized Build image to run as a user other than **root** you will not need to change these.
+
 ## Maintainers
 
 [![Phase2 Logo](https://s3.amazonaws.com/phase2.public/logos/phase2-logo.png)](https://www.phase2technology.com)

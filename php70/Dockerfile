@@ -128,6 +128,11 @@ RUN source $NVM_DIR/nvm.sh && \
 # Set the default version which can be overridden by ENV.
 RUN source $NVM_DIR/nvm.sh && nvm alias default $NODE_VERSION && nvm cache clear
 
+# Configure npm for container life.
+ENV NPM_CONFIG_UNSAFE_PERM true
+# Configure bower for container life.
+ENV BOWER_ALLOW_ROOT true
+
 COPY root /
 
 # Install Drush commands
