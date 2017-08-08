@@ -55,7 +55,8 @@ offered by this image.
 
 * `NODE_VERSION`: [`4`|`6`|`8`] Defaults to 4. Selects the major version of Node
   to make available to all tools via nvm. The latest minor release as of the image build will be used.
-* `PHP_XDEBUG`: [`"true"`|`"false"`] Specify whether the PHP Xdebug extension should be enabled.
+* `PHP_XDEBUG`: [`"true"`|`"false"`] Specify whether the PHP Xdebug extension should be enabled. Xdebug is configured to autostart on script execution and attempt to use a remote connection to 192.168.99.1 on port 9000.
+* `XDEBUG_CONFIG`: This can be used to override many of the Xdebug remote settings. You can find documentation of this variable at [https://xdebug.org/docs/remote](https://xdebug.org/docs/remote). By default this variable is not set as all needed configuration is set within the .ini file. An example setting to override the remote host and port would be `"remote_host=172.17.0.1 remote_port=9999"`.
 
 ### Default Tools Configuration
 
