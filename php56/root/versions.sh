@@ -16,9 +16,6 @@ echo ''
 echo 'Grunt version:'
 grunt --version
 echo ''
-echo 'Yeoman version:'
-yo --version
-echo ''
 echo 'Ruby version:'
 ruby --version
 echo ''
@@ -33,6 +30,3 @@ composer --version
 echo ''
 echo 'Drush version:'
 drush --version
-echo ''
-echo 'Drupal Console version:'
-drupal --version
