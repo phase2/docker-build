@@ -4,15 +4,18 @@
 
 ## Supported tags and respective `Dockerfile` links
 
--	[`php55` (*php55/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php55/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php55.svg)](https://microbadger.com/images/outrigger/build:php55 "Get your own image badge on microbadger.com")
--	[`php56` (*php56/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php56/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
--	[`php70` (*php70/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php70/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
--	[`php71` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php71/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php71.svg)](https://microbadger.com/images/outrigger/build:php71 "Get your own image badge on microbadger.com")
+- [`php55` (*php55/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php55/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php55.svg)](https://microbadger.com/images/outrigger/build:php55 "Get your own image badge on microbadger.com")
+- [`php56` (*php56/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php56/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
+- [`php70` (*php70/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php70/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
+- [`php71` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php71/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php71.svg)](https://microbadger.com/images/outrigger/build:php71 "Get your own image badge on microbadger.com")
 
 This image provides the many development tools necessary to build applications
 the Outrigger way, bundled with a wide array of tools useful for development and
 troubleshooting via the command-line interface. While it is possible to directly
 connect to the web containers, this is the preferred way to perform "server work".
+
+The build images derive from [outrigger/keel](https://github.com/phase2/docker-keel),
+our CLI workshop base image.
 
 For more documentation on how Outrigger images are constructed and how to work
 with them, please [see the documentation](http://docs.outrigger.sh).
@@ -48,9 +51,9 @@ file is written there. For example `/data/PROJECT/ENV/bash:/root/bash`
 
 ## Environment Variables
 
-Outrigger images use Environment Variables and [confd](https://github.com/kelseyhightower/confd) to templatize a number 
-of Docker environment configurations. These templates are processed on startup with environment variables passed in 
-via the docker run command-line or via your `docker-compose.yml` manifest file. Here are the "tunable" configurations 
+Outrigger images use Environment Variables and [confd](https://github.com/kelseyhightower/confd) to templatize a number
+of Docker environment configurations. These templates are processed on startup with environment variables passed in
+via the docker run command-line or via your `docker-compose.yml` manifest file. Here are the "tunable" configurations
 offered by this image.
 
 * `NODE_VERSION`: [`4`|`6`|`8`] Defaults to 4. Selects the major version of Node

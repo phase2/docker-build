@@ -1,15 +1,18 @@
-FROM centos:7
+FROM outrigger/keel:1.0
+
+# Add Labels for differences from outrigger/keel.
+# @see http://label-schema.org/rc1/
+LABEL # CentOS adds a name label but it is misleading in our instance.
+  name="Outrigger Build (PHP)" \
+  org.label-schema.name="Outrigger Build (PHP)" \
+  org.label-schema.description="A CentOS-based image that facilitates interconnected build and operational tasks for PHP." \
+  org.label-schema.vcs-url="https://github.com/phase2/docker-build" \
+  org.label-schema.docker.cmd="docker run -it --rm outrigger/build:php56 bash" \
+  org.label-schema.docker.cmd.help="docker run -it --rm outrigger/build:php56"
 
 # Install base packages.
-RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
-    yum -y update && \
-    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
-
-# Download confd.
-ENV CONFD_VERSION 0.11.0
-RUN curl -L "https://github.com/kelseyhightower/confd/releases/download/v$CONFD_VERSION/confd-$CONFD_VERSION-linux-amd64" > /usr/bin/confd && \
-    chmod +x /usr/bin/confd
-ENV CONFD_OPTS '--backend=env --onetime'
+RUN yum -y install epel-release yum-plugin-ovl deltarpm \
+    && yum -y update
 
 RUN yum -y install \
       centos-release-scl-rh \
@@ -18,10 +21,7 @@ RUN yum -y install \
       https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
     yum -y update
 
-# Add the IUS repository. This is needed for git2.
-RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
-    rpm -Uvh /usr/local/ius-release.rpm
-
+# Install language runtimes and additional tools.
 RUN yum -y install \
     # Install PHP
     rh-php56 \
@@ -42,25 +42,15 @@ RUN yum -y install \
     ruby193-rubygems \
     ruby193-ruby-devel \
     # Install Miscellaneous Tools
-    bzip2 \
     gcc-c++ \
-    git2u-all \
     httpd-tools \
-    jq \
-    make \
     mariadb \
     nmap-ncat \
-    patch \
     postgresql \
-    pv \
-    rsync \
-    sendmail \
-    unzip \
-    # Necessary for drush
-    which \
     # Necessary library for phantomjs per https://github.com/ariya/phantomjs/issues/10904
     fontconfig \
-    && yum clean all
+    && yum clean all \
+    && rm -rf /var/cache/yum
 
 # Ensure ruby193 binaries are in path
 ENV PATH /root/.composer/vendor/bin:/opt/rh/ruby193/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -86,10 +76,6 @@ ENV PKG_CONFIG_PATH /opt/rh/ruby193/root/usr/lib64/pkgconfig
 
 # Ensure $HOME is set
 ENV HOME /root
-
-# Configure Git
-# https://git-scm.com/docs/git-config#git-config-corepreloadIndex
-RUN git config --global core.preloadindex true
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
