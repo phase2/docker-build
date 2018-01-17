@@ -37,6 +37,7 @@ RUN yum -y install \
     rh-php56-php-pecl-xdebug \
     more-php56-php-mcrypt \
     more-php56-php-pecl-xhprof \
+    more-php56-php-pecl-yaml \
     # Install Ruby
     ruby193 \
     ruby193-rubygems \

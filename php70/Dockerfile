@@ -37,6 +37,8 @@ RUN yum -y install \
     php70-php-pecl-xdebug \
     php70-php-posix \
     php70-php-mcrypt \
+    php70-php-pecl-yaml \
+    php70-php-pecl-zip \
     # Install Ruby
     ruby193 \
     ruby193-rubygems \
