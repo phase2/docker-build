@@ -37,6 +37,8 @@ RUN yum -y install \
     php71-php-pecl-xdebug \
     php71-php-posix \
     php71-php-mcrypt \
+    php71-php-pecl-yaml \
+    php71-php-pecl-zip \
     # Install Ruby
     ruby193 \
     ruby193-rubygems \

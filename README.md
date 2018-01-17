@@ -4,10 +4,10 @@
 
 ## Supported tags and respective `Dockerfile` links
 
--	[`php55` (*php55/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php55/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php55.svg)](https://microbadger.com/images/outrigger/build:php55 "Get your own image badge on microbadger.com")
--	[`php56` (*php56/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php56/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
--	[`php70` (*php70/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php70/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
--	[`php71` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php71/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php71.svg)](https://microbadger.com/images/outrigger/build:php71 "Get your own image badge on microbadger.com")
+- [`php55` (*php55/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php55/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php55.svg)](https://microbadger.com/images/outrigger/build:php55 "Get your own image badge on microbadger.com")
+- [`php56` (*php56/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php56/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
+- [`php70` (*php70/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php70/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
+- [`php71` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php71/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php71.svg)](https://microbadger.com/images/outrigger/build:php71 "Get your own image badge on microbadger.com")
 
 This image provides the many development tools necessary to build applications
 the Outrigger way, bundled with a wide array of tools useful for development and
@@ -48,14 +48,16 @@ file is written there. For example `/data/PROJECT/ENV/bash:/root/bash`
 
 ## Environment Variables
 
-Outrigger images use Environment Variables and [confd](https://github.com/kelseyhightower/confd) to templatize a number 
-of Docker environment configurations. These templates are processed on startup with environment variables passed in 
-via the docker run command-line or via your `docker-compose.yml` manifest file. Here are the "tunable" configurations 
+Outrigger images use Environment Variables and [confd](https://github.com/kelseyhightower/confd) to templatize a number
+of Docker environment configurations. These templates are processed on startup with environment variables passed in
+via the docker run command-line or via your `docker-compose.yml` manifest file. Here are the "tunable" configurations
 offered by this image.
 
 * `NODE_VERSION`: [`4`|`6`|`8`] Defaults to 4. Selects the major version of Node
   to make available to all tools via nvm. The latest minor release as of the image build will be used.
 * `PHP_XDEBUG`: [`"true"`|`"false"`] Specify whether the PHP Xdebug extension should be enabled. Xdebug is configured to autostart on script execution and attempt to use a remote connection to 192.168.99.1 on port 9000.
+* `PHP_YAML`: [`"false"`|`"true"`] A string literal to enable PHP YAML extension.
+  Defaults to `"false"`.
 * `XDEBUG_CONFIG`: This can be used to override many of the Xdebug remote settings. You can find documentation of this variable at [https://xdebug.org/docs/remote](https://xdebug.org/docs/remote). By default this variable is not set as all needed configuration is set within the .ini file. An example setting to override the remote host and port would be `"remote_host=172.17.0.1 remote_port=9999"`.
 
 ### Default Tools Configuration
@@ -72,6 +74,10 @@ options, check the configuration documentation for individual tools.
     * `BOWER_ALLOW_ROOT`: [`true`] Bower will refuse to execute when run as root without the --allow-root flag. This sets that as a persisting configuration.
 
 Unless you are modifying a customized Build image to run as a user other than **root** you will not need to change these.
+
+## Security Reports
+
+Please email outrigger@phase2technology.com with security concerns.
 
 ## Maintainers
 
