@@ -2,13 +2,14 @@ FROM outrigger/keel:1.0
 
 # Add Labels for differences from outrigger/keel.
 # @see http://label-schema.org/rc1/
-LABEL # CentOS adds a name label but it is misleading in our instance.
+# CentOS adds a name label but it is misleading in our instance.
+LABEL \
   name="Outrigger Build (PHP)" \
   org.label-schema.name="Outrigger Build (PHP)" \
   org.label-schema.description="A CentOS-based image that facilitates interconnected build and operational tasks for PHP." \
   org.label-schema.vcs-url="https://github.com/phase2/docker-build" \
-  org.label-schema.docker.cmd="docker run -it --rm outrigger/build:php56 bash" \
-  org.label-schema.docker.cmd.help="docker run -it --rm outrigger/build:php56"
+  org.label-schema.docker.cmd="docker run -it --rm outrigger/build:php55 bash" \
+  org.label-schema.docker.cmd.help="docker run -it --rm outrigger/build:php55"
 
 # Install base packages.
 RUN yum -y install centos-release-scl \
