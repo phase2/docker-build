@@ -14,6 +14,9 @@ the Outrigger way, bundled with a wide array of tools useful for development and
 troubleshooting via the command-line interface. While it is possible to directly
 connect to the web containers, this is the preferred way to perform "server work".
 
+The build images derive from [outrigger/keel](https://github.com/phase2/docker-keel),
+our CLI workshop base image.
+
 For more documentation on how Outrigger images are constructed and how to work
 with them, please [see the documentation](http://docs.outrigger.sh).
 
