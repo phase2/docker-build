@@ -8,6 +8,7 @@
 - [`php56` (*php56/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php56/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php56.svg)](https://microbadger.com/images/outrigger/build:php56 "Get your own image badge on microbadger.com")
 - [`php70` (*php70/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php70/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php70.svg)](https://microbadger.com/images/outrigger/build:php70 "Get your own image badge on microbadger.com")
 - [`php71` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php71/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php71.svg)](https://microbadger.com/images/outrigger/build:php71 "Get your own image badge on microbadger.com")
+- [`php72` (*php71/Dockerfile*)](https://github.com/phase2/docker-build/blob/master/php72/Dockerfile) [![](https://images.microbadger.com/badges/image/outrigger/build:php72.svg)](https://microbadger.com/images/outrigger/build:php72 "Get your own image badge on microbadger.com")
 
 This image provides the many development tools necessary to build applications
 the Outrigger way, bundled with a wide array of tools useful for development and
