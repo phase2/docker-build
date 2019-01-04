@@ -3,7 +3,8 @@ FROM centos:7
 # Install base packages.
 RUN yum -y install epel-release yum-plugin-ovl deltarpm && \
     yum -y update && \
-    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+    yum -y install sudo ssh curl less vim-minimal dnsutils openssl && \
+    yum clean all
 
 # Download confd.
 ENV CONFD_VERSION 0.11.0
@@ -16,7 +17,8 @@ RUN yum -y install \
       https://www.softwarecollections.org/en/scls/remi/php56more/epel-7-x86_64/download/remi-php56more-epel-7-x86_64.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/ruby193/epel-7-x86_64/download/rhscl-ruby193-epel-7-x86_64.noarch.rpm \
       https://www.softwarecollections.org/en/scls/rhscl/v8314/epel-7-x86_64/download/rhscl-v8314-epel-7-x86_64.noarch.rpm && \
-    yum -y update
+    yum -y update && \
+    yum clean all
 
 # Add the IUS repository. This is needed for git2.
 RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \

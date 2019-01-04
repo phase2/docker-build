@@ -3,7 +3,8 @@ FROM centos:7
 # Install base packages.
 RUN yum -y install epel-release centos-release-scl yum-plugin-ovl deltarpm && \
     yum -y update && \
-    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+    yum -y install sudo ssh curl less vim-minimal dnsutils openssl && \
+    yum clean all
 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms
 
@@ -15,7 +16,8 @@ ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
       https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
-    yum -y update
+    yum -y update && \
+    yum clean all
 
 # Add the IUS repository. This is needed for git2.
 RUN curl -L "https://centos7.iuscommunity.org/ius-release.rpm" > /usr/local/ius-release.rpm && \
