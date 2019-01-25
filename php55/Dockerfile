@@ -3,7 +3,8 @@ FROM centos:7
 # Install base packages.
 RUN yum -y install epel-release centos-release-scl yum-plugin-ovl deltarpm && \
     yum -y update && \
-    yum -y install sudo ssh curl less vim-minimal dnsutils openssl
+    yum -y install sudo ssh curl less vim-minimal dnsutils openssl && \
+    yum clean all
 
 # Download confd.
 ENV CONFD_VERSION 0.11.0
@@ -13,7 +14,8 @@ ENV CONFD_OPTS '--backend=env --onetime'
 
 RUN yum -y install \
       https://www.softwarecollections.org/en/scls/remi/php55more/epel-7-x86_64/download/remi-php55more-epel-7-x86_64.noarch.rpm && \
-    yum -y update
+    yum -y update && \
+    yum clean all
 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms
 
