@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+echo "Setting node version to: $NODE_VERSION"
+source $HOME/.nvm/nvm.sh && nvm alias default $NODE_VERSION
