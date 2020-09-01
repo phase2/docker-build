@@ -1,6 +1,6 @@
 [template]
 src = "xdebug.ini.tmpl"
-dest = "/etc/opt/remi/php73/php.d/15-xdebug.ini"
+dest = "/etc/opt/remi/php74/php.d/15-xdebug.ini"
 uid = 0
 gid = 0
 mode = "0644"

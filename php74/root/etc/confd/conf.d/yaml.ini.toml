@@ -1,6 +1,6 @@
 [template]
 src = "yaml.ini.tmpl"
-dest = "/etc/opt/remi/php73/php.d/40-yaml.ini"
+dest = "/etc/opt/remi/php74/php.d/40-yaml.ini"
 uid = 0
 gid = 0
 mode = "0644"
